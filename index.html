@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soil Moisture Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef6f7;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: #2a7f62;
+    }
+    .dashboard {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .moisture-value {
+      font-size: 3rem;
+      color: #2a7f62;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .status.good {
+      color: green;
+    }
+    .status.dry {
+      color: orange;
+    }
+    .status.very-dry {
+      color: red;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2a7f62;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #24654f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Soil Moisture Dashboard</h1>
+  <div class="dashboard">
+    <div>Soil Moisture Level</div>
+    <div class="moisture-value" id="moistureValue">--%</div>
+    <div class="status" id="status">Loading...</div>
+    <button onclick="fetchMoistureData()">Refresh</button>
+  </div>
+
+  <script>
+    // Simulated fetch function for soil moisture data (replace with actual API call if available)
+    function fetchMoistureData() {
+      // Simulated soil moisture percentage between 0 and 100
+      const moisture = Math.floor(Math.random() * 101);
+
+      const moistureValueElement = document.getElementById('moistureValue');
+      const statusElement = document.getElementById('status');
+      moistureValueElement.textContent = moisture + '%';
+
+      if (moisture > 60) {
+        statusElement.textContent = 'Good Moisture';
+        statusElement.className = 'status good';
+      } else if (moisture > 30) {
+        statusElement.textContent = 'Dry';
+        statusElement.className = 'status dry';
+      } else {
+        statusElement.textContent = 'Very Dry - Water Needed';
+        statusElement.className = 'status very-dry';
+      }
+    }
+
+    // Initial load
+    fetchMoistureData();
+
+    // Auto refresh every 10 seconds (optional)
+    setInterval(fetchMoistureData, 10000);
+  </script>
+</body>
+</html>
